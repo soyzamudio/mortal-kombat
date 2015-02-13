@@ -10,50 +10,58 @@ var paths = {
   lesssrc: ['./client/**/*.less'],
   codesrc: ['./client/**/*.js', './server/**/*.js'],
   clntsrc: ['./client/**/*.js'],
+  audiosrc: ['./client/**/*.mp3'],
   jadedst: './public',
   lessdst: './public',
-  codedst: './public'
+  codedst: './public',
+  audiodst: './public'
 };
 
-gulp.task('build', ['jade', 'less', 'lint', 'jscs', 'copy']);
+gulp.task('build', ['jade', 'less', 'lint', 'jscs', 'copy', 'audio']);
 gulp.task('default', ['build', 'watch']);
 
 gulp.task('jade', function() {
   gulp.src(paths.jadesrc)
-    .pipe(jade({pretty: true, doctype: 'html'}))
-    .on('error', console.error.bind(console))
-    .pipe(gulp.dest(paths.jadedst));
+  .pipe(jade({pretty: true, doctype: 'html'}))
+  .on('error', console.error.bind(console))
+  .pipe(gulp.dest(paths.jadedst));
 });
 
 gulp.task('less', function() {
   gulp.src(paths.lesssrc)
-    .pipe(less())
-    .on('error', console.error.bind(console))
-    .pipe(gulp.dest(paths.lessdst));
+  .pipe(less())
+  .on('error', console.error.bind(console))
+  .pipe(gulp.dest(paths.lessdst));
 });
 
 gulp.task('lint', function() {
   gulp.src(paths.codesrc)
-    .pipe(lint())
-    .pipe(lint.reporter('jshint-stylish'));
+  .pipe(lint())
+  .pipe(lint.reporter('jshint-stylish'));
 });
 
 gulp.task('jscs', function() {
   gulp.src(paths.codesrc)
-    .pipe(jscs())
-    .on('error', function (err) {
-      console.log(err.message);
-      this.emit('end');
-    });
+  .pipe(jscs())
+  .on('error', function (err) {
+    console.log(err.message);
+    this.emit('end');
+  });
 });
 
 gulp.task('copy', function() {
   gulp.src(paths.clntsrc)
-    .pipe(copy(paths.codedst, {prefix:1}));
+  .pipe(copy(paths.codedst, {prefix:1}));
+});
+
+gulp.task('audio', function() {
+  gulp.src(paths.audiosrc)
+  .pipe(copy(paths.audiodst, {prefix:1}));
 });
 
 gulp.task('watch', function() {
   gulp.watch(paths.jadesrc, ['jade']);
   gulp.watch(paths.lesssrc, ['less']);
+  gulp.watch(paths.audiosrc, ['audio']);
   gulp.watch(paths.codesrc, ['lint', 'jscs', 'copy']);
 });
