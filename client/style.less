@@ -1,3 +1,82 @@
-h1{
-  color :red;
+body {
+  background: url('/images/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+#weapons {
+  .weapon {
+    background-color: #B25C50;
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    border: 1px solid black;
+
+    &> div:first-child {
+      background-color: white;
+      height: 100px;
+      width: 100px;
+      border: 1px solid black;
+      background-size: cover;
+    }
+
+    &> div:nth-child(2) {
+      font-weight: bold;
+      color: white;
+      padding-top: 10px;
+      font-family: monospace;
+    }
+  }
+}
+
+#fighters {
+  .fighter {
+    background-color: #B25C50;
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+
+    &> div:first-child {
+      background-color: white;
+      height: 100px;
+      width: 100px;
+      border: 1px solid black;
+      background-size: cover;
+    }
+
+    &> div:nth-child(2) {
+      font-weight: bold;
+      color: white;
+      padding-top: 10px;
+      font-family: monospace;
+    }
+  }
+}
+
+.player-one {
+  background-color: green !important;
+}
+
+.player-two {
+  background-color: blue !important;
+}
+
+.winner {
+  background-color: #ffd700 !important;
+}
+
+.choose {
+  background-color: #B29889 !important;
+  border: 1px solid #fff !important;
+}
+
+.picked {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: url(grayscale.svg); /* Firefox 4+ */
+  filter: gray; /* IE 6-9 */;
 }
